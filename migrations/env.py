@@ -1,5 +1,6 @@
 import logging
 from logging.config import fileConfig
+from alexandria_library.models import *
 
 from flask import current_app
 
