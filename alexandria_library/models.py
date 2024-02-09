@@ -8,6 +8,7 @@ class User(db.Model):
     name = db.Column(db.String(20), nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(60), nullable=False)
+    profile = db.Column(db.String(80), db.ForeignKey('users_profiles.id'), nullable=False)
     registerDate = db.Column(db.Date, nullable=False, default=datetime.today())
 
     def __repr__(self):
@@ -42,3 +43,12 @@ class BookGenre(db.Model):
 
     def __repr__(self):
         return f"BookGenre('{self.book_id}', '{self.genre_id}')"
+    
+class UsersProfiles(db.Model):
+    id = db.Column(Uuid, primary_key=True, default=uuid.uuid4)
+    profile = db.Column(db.String(80), nullable=False, unique=True)
+    registerDate = db.Column(db.Date, nullable=False, default=datetime.today())
+
+    def __repr__(self):
+        return f"User Profile('{self.profile}')"
+    
