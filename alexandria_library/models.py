@@ -11,6 +11,8 @@ class User(db.Model):
     profile = db.Column(db.String(80), db.ForeignKey('users_profiles.id'), nullable=False)
     registerDate = db.Column(db.Date, nullable=False, default=datetime.today())
 
+    borrows = db.relationship('BookBorrowing', backref='user', lazy=True)
+
     def __repr__(self):
         return f"User('{self.name}', '{self.email}')"
     
@@ -22,10 +24,20 @@ class Book(db.Model):
     publishDate = db.Column(db.Date, nullable=False)
     registerDate = db.Column(db.Date, nullable=False, default=datetime.today())
 
+    borrows = db.relationship('BookBorrowing', backref='book', lazy=True)
     genres = db.relationship('Genre', secondary='book_genre', backref=db.backref('books', lazy='dynamic'))
 
     def __repr__(self):
         return f"Book('{self.name}', '{self.author}')"
+    
+class BookStock(db.Model):
+    id = db.Column(Uuid, primary_key=True, default=uuid.uuid4)
+    bookId = db.Column(Uuid, db.ForeignKey('book.id'), nullable=False)
+    quantity = db.Column(db.Integer, nullable=False)
+    registerDate = db.Column(db.Date, nullable=False, default=datetime.today())
+
+    def __repr__(self):
+        return f"BookStock('{self.bookId}', '{self.quantity}')"
     
 class Genre(db.Model):
     id = db.Column(Uuid, primary_key=True, default=uuid.uuid4)
@@ -37,8 +49,8 @@ class Genre(db.Model):
     
 class BookGenre(db.Model):
     id = db.Column(Uuid, primary_key=True, default=uuid.uuid4)
-    book_id = db.Column(Uuid, db.ForeignKey('book.id'), nullable=False)
-    genre_id = db.Column(Uuid, db.ForeignKey('genre.id'), nullable=False)
+    bookId = db.Column(Uuid, db.ForeignKey('book.id'), nullable=False)
+    genreId = db.Column(Uuid, db.ForeignKey('genre.id'), nullable=False)
     registerDate = db.Column(db.Date, nullable=False, default=datetime.today())
 
     def __repr__(self):
@@ -52,3 +64,12 @@ class UsersProfiles(db.Model):
     def __repr__(self):
         return f"User Profile('{self.profile}')"
     
+class BookBorrowing(db.Model):
+    id = db.Column(Uuid, primary_key=True, default=uuid.uuid4)
+    userId = db.Column(Uuid, db.ForeignKey('user.id'), nullable=False)
+    bookId = db.Column(Uuid, db.ForeignKey('book.id'), nullable=False)
+    returnDate = db.Column(db.Date, nullable=False)
+    registerDate = db.Column(db.Date, nullable=False, default=datetime.today())
+
+    def __repr__(self):
+        return f"BookBorrowing('{self.userId}', '{self.bookId}', '{self.registerDate}', '{self.returnDate}')"
