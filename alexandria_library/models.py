@@ -8,7 +8,7 @@ class User(db.Model):
     name = db.Column(db.String(20), nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(60), nullable=False)
-    profile = db.Column(db.String(80), db.ForeignKey('users_profiles.id'), nullable=False)
+    profile = db.Column(Uuid, db.ForeignKey('users_profiles.id'), nullable=False)
     registerDate = db.Column(db.Date, nullable=False, default=datetime.today())
 
     borrows = db.relationship('BookBorrowing', backref='user', lazy=True)
