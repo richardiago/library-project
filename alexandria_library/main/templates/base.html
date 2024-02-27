@@ -9,6 +9,53 @@
     <title>{% block title %} {% endblock %}</title>
 </head>
 <body>
+
+    <header>
+        <div class="flex w-full px-5 py-5 items-center">
+            <!-- Logo -->
+            <div class="px-3">
+                <a href="#">
+                    <img src="{{ url_for('static', filename='img/library_logo.svg') }}" alt="Alexandria Library" class="w-10">
+                </a>
+            </div>
+
+            <!-- Opções -->
+            <div class="md:text-xl font-bold">
+                <nav>
+                    <ul class="flex">
+                        <li class="px-4">
+                            <a href="#">Home</a>
+                        </li>
+                        <li class="px-4">
+                            <a href="#">Livros</a>
+                        </li>
+                        <li class="px-4">
+                            <a href="#">Autores</a>
+                        </li>
+                        <li class="px-4">
+                            <a href="#">Gêneros</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+
+            <!-- Barra de pesquisa -->
+            <div class="w-full">
+                <form action="">
+                    <input type="text" placeholder="Pesquise aqui"
+                        class="flex-1 border rounded border-gray-400 bg-gray-200 h-10 w-full"
+                    />
+                </form>
+            </div>
+
+            <!-- Login -->
+            <div>
+
+            </div>
+        </div>
+    </header>
+
+
     {% block content %} {% endblock %}
 </body>
 </html>
