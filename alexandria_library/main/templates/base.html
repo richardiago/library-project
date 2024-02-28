@@ -5,13 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link href="./static/css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="shortcut icon" href="{{ url_for('static', filename='img/library_favicon.ico') }}">
     <title>{% block title %} {% endblock %}</title>
 </head>
 <body>
 
     <header>
-        <div class="flex w-full px-5 py-5 items-center">
+        <div class="flex w-full px-5 py-5 items-center bg-purple-400 border-b border-gray-400">
             <!-- Logo -->
             <div class="px-3">
                 <a href="#">
@@ -20,7 +21,7 @@
             </div>
 
             <!-- Opções -->
-            <div class="md:text-xl font-bold">
+            <div class="md:text-xl font-bold px-4">
                 <nav>
                     <ul class="flex">
                         <li class="px-4">
@@ -40,19 +41,35 @@
             </div>
 
             <!-- Barra de pesquisa -->
-            <div class="w-full">
-                <form action="">
+            <div class="items-center flex-grow pr-4">
+
+                <form action="" class="flex">
+                    <button class="border-b border-gray-400 bg-white h-10 px-1 rounded-l-md" disabled>
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+
                     <input type="text" placeholder="Pesquise aqui"
-                        class="flex-1 border rounded border-gray-400 bg-gray-200 h-10 w-full"
+                        class="border-b outline-none border-gray-400 bg-white h-10 w-full px-1 placeholder:italic rounded-r-md"
                     />
                 </form>
             </div>
 
             <!-- Login -->
-            <div>
+            <div class="flex space-x-2 pl-2">
 
+                <button class="border rounded-md border-blue-400 bg-blue-500 h-10 px-3">
+                    <i class="fa-solid fa-right-to-bracket"></i>
+                    Login
+                </button>
+                
+                <button class="border rounded-md border-green-400 bg-green-500 h-10 px-3">
+                    <i class="fa-solid fa-pen-to-square"></i>
+                    Cadastre-se
+                </button>
+    
             </div>
         </div>
+
     </header>
 
 
